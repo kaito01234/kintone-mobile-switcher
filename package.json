@@ -1,0 +1,25 @@
+{
+  "name": "kintone-mobile-switcher",
+  "version": "0.1.0",
+  "main": "background.js",
+  "scripts": {
+    "build": "NODE_ENV=production node build.js && npm run package",
+    "dev": "NODE_ENV=development node build.js --watch",
+    "clean": "rm -rf dist",
+    "package": "zip -r kintone-mobile-switcher.zip dist/",
+    "format": "prettier --write \"**/*.{ts,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,json,md}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "^0.1.24",
+    "@types/node": "^24.9.1",
+    "esbuild": "^0.24.0",
+    "fs-extra": "^11.2.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3"
+  }
+}
