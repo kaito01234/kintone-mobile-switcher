@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+public/
+
+# IDE
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# TypeScript
+*.tsbuildinfo
+*.d.ts
+*.d.ts.map
