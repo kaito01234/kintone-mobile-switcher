@@ -58,6 +58,11 @@ function convertMobileToPC(urlParts: KintoneUrlParts): string {
     return `${domain}/k/#/${hashPath}${queryString ? `?${queryString}` : ""}`;
   }
 
+  // Handle assigned URL: /k/m/assigned -> /k/#/portal
+  else if (pathParts[2] === "assigned") {
+    return `${domain}/k/#/portal`;
+  }
+
   // Handle other URLs (app list, etc.)
   else {
     const queryString = queryParams.toString();
@@ -68,9 +73,16 @@ function convertMobileToPC(urlParts: KintoneUrlParts): string {
 function convertPCToMobile(url: URL, urlParts: KintoneUrlParts): string {
   const { domain, pathParts, hash } = urlParts;
 
-  // Handle hash-based URLs (#/space/1/thread/1)
+  // Handle hash-based URLs (#/space/1/thread/1, #/portal)
   if (hash.startsWith("#/")) {
     const hashPath = hash.substring(2); // Remove #/
+
+    // Portal URL: #/portal -> /k/m/
+    // Notification URL: #/ntf/... -> /k/m/
+    if (hashPath === "portal" || hashPath.startsWith("ntf/")) {
+      return `${domain}/k/m/`;
+    }
+
     return `${domain}/k/m/${hashPath}`;
   }
 
