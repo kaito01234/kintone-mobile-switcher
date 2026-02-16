@@ -6,8 +6,22 @@ interface KintoneUrlParts {
   hash: string;
 }
 
+const KINTONE_DOMAINS = [
+  ".cybozu-dev.cn",
+  ".cybozu-dev.com",
+  ".cybozu.cn",
+  ".cybozu.com",
+  ".kintone-dev.com",
+  ".kintone.com",
+];
+
+function isKintoneDomain(hostname: string): boolean {
+  if (hostname === "localhost") return true;
+  return KINTONE_DOMAINS.some((domain) => hostname.endsWith(domain));
+}
+
 function parseKintoneUrl(url: URL): KintoneUrlParts | null {
-  if (!url.pathname.startsWith("/k/")) {
+  if (!isKintoneDomain(url.hostname) || !url.pathname.startsWith("/k/")) {
     return null;
   }
 
@@ -51,8 +65,8 @@ function convertMobileToPC(urlParts: KintoneUrlParts): string {
     }
   }
 
-  // Handle space/thread URLs
-  else if (pathParts[2] === "space") {
+  // Handle space/thread/people URLs (hash-based on PC)
+  else if (pathParts[2] === "space" || pathParts[2] === "people") {
     const hashPath = pathParts.slice(2).join("/");
     const queryString = queryParams.toString();
     return `${domain}/k/#/${hashPath}${queryString ? `?${queryString}` : ""}`;

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const esbuild = require("esbuild");
 const fs = require("fs-extra");
-const path = require("path");
+const sharp = require("sharp");
 
 async function build() {
   const isWatch = process.argv.includes("--watch");
@@ -30,9 +30,19 @@ async function build() {
     await esbuild.build(buildOptions);
   }
 
+  // Generate icons from SVG
+  const iconSizes = [16, 48, 128];
+  await Promise.all(
+    iconSizes.map((size) =>
+      sharp("icon/icon.svg")
+        .resize(size, size)
+        .png()
+        .toFile(`dist/icon${size}.png`)
+    )
+  );
+
   // Copy static files
   await fs.copy("src/manifest.json", "dist/manifest.json");
-  await fs.copy("icon", "dist", { filter: (src) => src.endsWith(".png") || fs.lstatSync(src).isDirectory() });
 
   console.log("Build complete!");
 }

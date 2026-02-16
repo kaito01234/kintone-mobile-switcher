@@ -1,6 +1,6 @@
 {
   "name": "kintone-mobile-switcher",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "background.js",
   "scripts": {
     "build": "NODE_ENV=production node build.js && npm run package",
@@ -13,13 +13,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/chrome": "^0.1.24",
     "@types/node": "^24.9.1",
     "esbuild": "^0.24.0",
     "fs-extra": "^11.2.0",
     "prettier": "^3.6.2",
+    "sharp": "^0.34.5",
     "typescript": "^5.9.3"
   }
 }

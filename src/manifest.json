@@ -1,12 +1,16 @@
 {
   "manifest_version": 3,
   "name": "Kintone PC/Mobile Switcher",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Switch between PC and mobile version of Kintone with one click",
   "permissions": ["activeTab", "tabs"],
   "host_permissions": [
+    "https://*.cybozu-dev.cn/*",
     "https://*.cybozu-dev.com/*",
+    "https://*.cybozu.cn/*",
     "https://*.cybozu.com/*",
+    "https://*.kintone-dev.com/*",
+    "https://*.kintone.com/*",
     "http://localhost/*"
   ],
   "action": {
@@ -15,7 +19,7 @@
       "48": "icon48.png",
       "128": "icon128.png"
     },
-    "default_title": "Switch Kintone version"
+    "default_title": "Switch to PC/Mobile view"
   },
   "background": {
     "service_worker": "background.js"
